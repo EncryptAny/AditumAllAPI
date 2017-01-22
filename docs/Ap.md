@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **downvotes** | **Long** | Number of Downvotes for given AP |  [optional]
-**id** | **Long** | Unique AP ID | 
+**id** | **String** | Unique AP ID | 
 **lat** | **Double** | Latitude of given AP | 
 **_long** | **Double** | Longitude of given AP | 
 **type** | [**TypeEnum**](#TypeEnum) | Type of Accessiblity Point | 

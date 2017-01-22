@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **lat** | **Double** | Latitude of AP | 
 **_long** | **Double** | Longitude of AP | 
 **type** | [**TypeEnum**](#TypeEnum) | Type of AP | 
-**venueID** | **Long** | Associated Venue ID |  [optional]
+**venueID** | **String** | Associated Venue ID |  [optional]
 
 
 <a name="TypeEnum"></a>

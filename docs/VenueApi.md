@@ -14,7 +14,7 @@ Method | HTTP request | Description
 
 <a name="venueAll"></a>
 # **venueAll**
-> venueAll()
+> Venues venueAll()
 
 all venue
 
@@ -29,7 +29,8 @@ Get all venues
 
 VenueApi apiInstance = new VenueApi();
 try {
-    apiInstance.venueAll();
+    Venues result = apiInstance.venueAll();
+    System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling VenueApi#venueAll");
     e.printStackTrace();
@@ -41,7 +42,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-null (empty response body)
+[**Venues**](Venues.md)
 
 ### Authorization
 
@@ -69,7 +70,7 @@ Downvote an existing AI for a venue
 
 VenueApi apiInstance = new VenueApi();
 String aiType = "aiType_example"; // String | Type of AI
-Integer venueID = 56; // Integer | Venue ID
+String venueID = "venueID_example"; // String | Venue ID
 try {
     apiInstance.venueDownvoteAI(aiType, venueID);
 } catch (ApiException e) {
@@ -83,7 +84,7 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **aiType** | **String**| Type of AI | [enum: epiPen, bathroom, aed]
- **venueID** | **Integer**| Venue ID |
+ **venueID** | **String**| Venue ID |
 
 ### Return type
 
@@ -100,7 +101,7 @@ No authorization required
 
 <a name="venueNew"></a>
 # **venueNew**
-> Venue venueNew(payload)
+> venueNew(payload)
 
 new venue
 
@@ -116,8 +117,7 @@ Create a new venue
 VenueApi apiInstance = new VenueApi();
 NewVenue payload = new NewVenue(); // NewVenue | Type for creating a new venue
 try {
-    Venue result = apiInstance.venueNew(payload);
-    System.out.println(result);
+    apiInstance.venueNew(payload);
 } catch (ApiException e) {
     System.err.println("Exception when calling VenueApi#venueNew");
     e.printStackTrace();
@@ -132,7 +132,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Venue**](Venue.md)
+null (empty response body)
 
 ### Authorization
 
@@ -160,7 +160,7 @@ Create a new AI for a venue
 
 VenueApi apiInstance = new VenueApi();
 String aiType = "aiType_example"; // String | Type of AI to Create
-Integer venueID = 56; // Integer | Venue ID
+String venueID = "venueID_example"; // String | Venue ID
 try {
     apiInstance.venueNewAI(aiType, venueID);
 } catch (ApiException e) {
@@ -174,7 +174,7 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **aiType** | **String**| Type of AI to Create | [enum: epiPen, bathroom, aed]
- **venueID** | **Integer**| Venue ID |
+ **venueID** | **String**| Venue ID |
 
 ### Return type
 
@@ -191,7 +191,7 @@ No authorization required
 
 <a name="venueShow"></a>
 # **venueShow**
-> Venue venueShow(venueID)
+> venueShow(venueID)
 
 show venue
 
@@ -205,10 +205,9 @@ Get venue by ID
 
 
 VenueApi apiInstance = new VenueApi();
-Integer venueID = 56; // Integer | Venue ID
+String venueID = "venueID_example"; // String | Venue ID
 try {
-    Venue result = apiInstance.venueShow(venueID);
-    System.out.println(result);
+    apiInstance.venueShow(venueID);
 } catch (ApiException e) {
     System.err.println("Exception when calling VenueApi#venueShow");
     e.printStackTrace();
@@ -219,11 +218,11 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **venueID** | **Integer**| Venue ID |
+ **venueID** | **String**| Venue ID |
 
 ### Return type
 
-[**Venue**](Venue.md)
+null (empty response body)
 
 ### Authorization
 
@@ -251,7 +250,7 @@ Upvote an existing AI for a venue
 
 VenueApi apiInstance = new VenueApi();
 String aiType = "aiType_example"; // String | Type of AI
-Integer venueID = 56; // Integer | Venue ID
+String venueID = "venueID_example"; // String | Venue ID
 try {
     apiInstance.venueUpvoteAI(aiType, venueID);
 } catch (ApiException e) {
@@ -265,7 +264,7 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **aiType** | **String**| Type of AI | [enum: epiPen, bathroom, aed]
- **venueID** | **Integer**| Venue ID |
+ **venueID** | **String**| Venue ID |
 
 ### Return type
 
