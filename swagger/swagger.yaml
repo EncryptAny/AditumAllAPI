@@ -1,0 +1,402 @@
+consumes:
+- application/json
+- application/xml
+- application/gob
+- application/x-gob
+definitions:
+  Ap:
+    description: Describes an Accessiblity Point in full (default view)
+    example:
+      downvotes: 6.9771407e+18
+      id: 6.8041655e+18
+      lat: 0.23672524
+      long: 0.124883875
+      type: ramp
+      upvotes: 8.3358034e+18
+      venueID: 6.4613796e+18
+    properties:
+      downvotes:
+        description: Number of Downvotes for given AP
+        example: 6.9771407e+18
+        format: int64
+        type: integer
+      id:
+        description: Unique AP ID
+        example: 6.8041655e+18
+        format: int64
+        type: integer
+      lat:
+        description: Latitude of given AP
+        example: 0.23672524
+        format: double
+        type: number
+      long:
+        description: Longitude of given AP
+        example: 0.124883875
+        format: double
+        type: number
+      type:
+        description: Type of Accessiblity Point
+        enum:
+        - parking
+        - door
+        - ramp
+        example: ramp
+        type: string
+      upvotes:
+        description: Number of Upvotes for given AP
+        example: 8.3358034e+18
+        format: int64
+        type: integer
+      venueID:
+        description: Associated Venue
+        example: 6.4613796e+18
+        format: int64
+        type: integer
+    required:
+    - id
+    - type
+    - lat
+    - long
+    title: 'Mediatype identifier: ap; view=default'
+    type: object
+  NewAP:
+    description: Type for creating a new AP
+    example:
+      lat: 0.39693773
+      long: 0.9291422
+      type: ramp
+      venueID: 4.6476373e+18
+    properties:
+      lat:
+        description: Latitude of AP
+        example: 0.39693773
+        format: double
+        type: number
+      long:
+        description: Longitude of AP
+        example: 0.9291422
+        format: double
+        type: number
+      type:
+        description: Type of AP
+        enum:
+        - parking
+        - door
+        - ramp
+        example: ramp
+        type: string
+      venueID:
+        description: Associated Venue ID
+        example: 4.6476373e+18
+        format: int64
+        type: integer
+    required:
+    - type
+    - lat
+    - long
+    title: NewAP
+    type: object
+  NewVenue:
+    description: Type for creating a new venue
+    example:
+      lat: 0.20280614
+      long: 0.7040051
+      name: Quidem pariatur asperiores impedit vel.
+      radius: 88.425575
+    properties:
+      lat:
+        description: Latitude of Venue
+        example: 0.20280614
+        format: double
+        type: number
+      long:
+        description: Longitude of Venue
+        example: 0.7040051
+        format: double
+        type: number
+      name:
+        description: Name of Venue
+        example: Quidem pariatur asperiores impedit vel.
+        type: string
+      radius:
+        description: Radius in meters of the distance in which the geofence is to
+          activate.
+        example: 88.425575
+        maximum: 200
+        minimum: 20
+        type: number
+    required:
+    - name
+    - lat
+    - long
+    - radius
+    title: NewVenue
+    type: object
+  Venue:
+    description: Fully describes a venue (default view)
+    example:
+      id: 4.083216e+18
+      lat: 0.15398517
+      long: 0.6469716
+      name: Id ut nesciunt.
+      radius: 5.973519e+18
+    properties:
+      id:
+        description: Unique Venue ID
+        example: 4.083216e+18
+        format: int64
+        type: integer
+      lat:
+        description: Latitude of Venue
+        example: 0.15398517
+        format: double
+        type: number
+      long:
+        description: Longitude of Venue
+        example: 0.6469716
+        format: double
+        type: number
+      name:
+        description: Name of Venue
+        example: Id ut nesciunt.
+        type: string
+      radius:
+        description: Distance in meters for the notification distance
+        example: 5.973519e+18
+        format: int64
+        type: integer
+    required:
+    - id
+    - name
+    title: 'Mediatype identifier: venue; view=default'
+    type: object
+host: 066727de.ngrok.io
+info:
+  description: The Universal Accessibility API
+  title: AditumAll API
+  version: ""
+paths:
+  /ap:
+    post:
+      description: Create an AP
+      operationId: ap#create
+      parameters:
+      - description: Type for creating a new AP
+        in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/NewAP'
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/Ap'
+        "400":
+          description: Bad Request
+      schemes:
+      - http
+      summary: create ap
+      tags:
+      - ap
+  /ap/{apID}/downvote:
+    post:
+      description: Upvote a particular AP
+      operationId: ap#upvote
+      parameters:
+      - description: AP ID
+        in: path
+        name: apID
+        required: true
+        type: integer
+      responses:
+        "200":
+          description: OK
+        "404":
+          description: Not Found
+      schemes:
+      - http
+      summary: upvote ap
+      tags:
+      - ap
+  /ap/{apID}/upvote:
+    post:
+      description: Downvote a particular AP
+      operationId: ap#downvote
+      parameters:
+      - description: AP ID
+        in: path
+        name: apID
+        required: true
+        type: integer
+      responses:
+        "200":
+          description: OK
+        "404":
+          description: Not Found
+      schemes:
+      - http
+      summary: downvote ap
+      tags:
+      - ap
+  /venue:
+    get:
+      description: Get all venues
+      operationId: venue#all
+      responses:
+        "200":
+          description: OK
+      schemes:
+      - http
+      summary: all venue
+      tags:
+      - venue
+    post:
+      description: Create a new venue
+      operationId: venue#new
+      parameters:
+      - description: Type for creating a new venue
+        in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/NewVenue'
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/Venue'
+        "400":
+          description: Bad Request
+      schemes:
+      - http
+      summary: new venue
+      tags:
+      - venue
+  /venue/{venueID}:
+    get:
+      description: Get venue by ID
+      operationId: venue#show
+      parameters:
+      - description: Venue ID
+        in: path
+        name: venueID
+        required: true
+        type: integer
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/Venue'
+        "404":
+          description: Not Found
+      schemes:
+      - http
+      summary: show venue
+      tags:
+      - venue
+  /venue/{venueID}/{aiType}:
+    post:
+      description: Create a new AI for a venue
+      operationId: venue#newAI
+      parameters:
+      - description: Type of AI to Create
+        enum:
+        - epiPen
+        - bathroom
+        - aed
+        in: path
+        name: aiType
+        required: true
+        type: string
+      - description: Venue ID
+        in: path
+        name: venueID
+        required: true
+        type: integer
+      responses:
+        "201":
+          description: Created
+        "409":
+          description: Conflict
+      schemes:
+      - http
+      summary: newAI venue
+      tags:
+      - venue
+  /venue/{venueID}/{aiType}/downvote:
+    post:
+      description: Downvote an existing AI for a venue
+      operationId: venue#downvoteAI
+      parameters:
+      - description: Type of AI
+        enum:
+        - epiPen
+        - bathroom
+        - aed
+        in: path
+        name: aiType
+        required: true
+        type: string
+      - description: Venue ID
+        in: path
+        name: venueID
+        required: true
+        type: integer
+      responses:
+        "200":
+          description: OK
+        "404":
+          description: Not Found
+      schemes:
+      - http
+      summary: downvoteAI venue
+      tags:
+      - venue
+  /venue/{venueID}/{aiType}/upvote:
+    post:
+      description: Upvote an existing AI for a venue
+      operationId: venue#upvoteAI
+      parameters:
+      - description: Type of AI
+        enum:
+        - epiPen
+        - bathroom
+        - aed
+        in: path
+        name: aiType
+        required: true
+        type: string
+      - description: Venue ID
+        in: path
+        name: venueID
+        required: true
+        type: integer
+      responses:
+        "200":
+          description: OK
+        "404":
+          description: Not Found
+      schemes:
+      - http
+      summary: upvoteAI venue
+      tags:
+      - venue
+produces:
+- application/json
+- application/xml
+- application/gob
+- application/x-gob
+responses:
+  BadRequest:
+    description: Bad Request
+  Conflict:
+    description: Conflict
+  NotFound:
+    description: Not Found
+  OK:
+    description: OK
+schemes:
+- http
+swagger: "2.0"
