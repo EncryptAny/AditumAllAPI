@@ -26,7 +26,7 @@ var apEnum = func() {
 
 var apAddType = Type("NewAP", func() {
 	Description("Type for creating a new AP")
-	Attribute("venueID", Integer, "Associated Venue ID")
+	Attribute("venueID", String, "Associated Venue ID")
 	Attribute("type", String, "Type of AP", apEnum)
 	Attribute("lat", Number, "Latitude of AP")
 	Attribute("long", Number, "Longitude of AP")
@@ -36,7 +36,7 @@ var apAddType = Type("NewAP", func() {
 var apMedia = MediaType("ap", func() {
 	Description("Describes an Accessiblity Point in full")
 	Attributes(func() {
-		Attribute("id", Integer, "Unique AP ID")
+		Attribute("id", String, "Unique AP ID")
 		Attribute("venueID", Integer, "Associated Venue")
 		Attribute("type", String, "Type of Accessiblity Point", apEnum)
 		Attribute("upvotes", Integer, "Number of Upvotes for given AP")
